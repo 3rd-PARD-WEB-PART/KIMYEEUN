@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,15 +13,180 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.First {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('/public/myphoto.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: FadeIn 2s ease;
 }
 
-@keyframes App-logo-spin {
+.Title {
+  font-size: calc(30px + 10vmin);
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: FadeIn 2s ease;
+}
+
+.SubTitle {
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: FadeIn 2s ease;
+}
+
+.Second {
+  height: 30vh;
+  margin-top: 20px;
+}
+
+.AboutMe {
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.Container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+
+.Main1 {
+  width: 150px;
+  height: 150px;
+  background-color: #FF4B00;
+  border-radius: 50%;
+  line-height: 150px;
+  font-weight: bold;
+  content: '#Age';
+}
+
+.Main1:hover span,
+.Main2:hover span,
+.Main3:hover span,
+.Main4:hover span,
+.Main5:hover span,
+.Main6:hover span {
+  display: none;
+}
+
+.Main1:hover {
+  background-color: #FF9066;
+  cursor: pointer;
+  
+}
+
+.Main1:hover:before {
+  content: '22';
+}
+
+.Main2 {
+  width: 150px;
+  height: 150px;
+  background-color: #6524B7;
+  border-radius: 50%;
+  line-height: 150px;
+  font-weight: bold;
+}
+
+.Main2:hover {
+  background-color: #B97DD1;
+  cursor: pointer;
+}
+
+.Main2:hover:before {
+  content: 'Daejeon';
+}
+
+.Main3 {
+  width: 150px;
+  height: 150px;
+  background-color: #31CA98;
+  border-radius: 50%;
+  font-weight: bold;
+  line-height: 150px;
+}
+
+.Main3:hover {
+  background-color: #9EFFC1;
+  cursor: pointer;
+}
+
+.Main3:hover:before {
+  content: 'bed';
+}
+
+.Main4 {
+  width: 150px;
+  height: 150px;
+  background-color: #535DFD;
+  border-radius: 50%;
+  line-height: 150px;
+  font-weight: bold;
+}
+
+.Main4:hover {
+  background-color: #A3AFFF;
+  cursor: pointer;
+}
+
+.Main4:hover:before {
+  content: 'Kuyper';
+}
+
+.Main5 {
+  width: 150px;
+  height: 150px;
+  background-color: #FFD700;
+  border-radius: 50%;
+  line-height: 150px;
+  font-weight: bold;
+}
+
+.Main5:hover {
+  background-color: #FFF0B2;
+  cursor: pointer;
+}
+
+.Main5:hover:before {
+  content: 'ISTP';
+}
+
+.Main6 {
+  width: 150px;
+  height: 150px;
+  background-color: #FF1493;
+  border-radius: 50%;
+  line-height: 150px;
+  font-weight: bold;
+}
+
+.Main6:hover {
+  background-color: #FF9AD0;
+  cursor: pointer;
+}
+
+.Main6:hover:before {
+  content: 'Eagles';
+}
+
+@keyframes FadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(50px);
+    /* 텍스트를 아래로 50px 이동 */
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+    /* 텍스트를 원래 위치로 이동 */
   }
 }
