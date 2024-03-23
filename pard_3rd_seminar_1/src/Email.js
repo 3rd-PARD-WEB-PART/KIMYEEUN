@@ -1,9 +1,10 @@
-function Email () {
-    return (
-        <div>
-            이메일
-        </div>
-    );
+function Email() {
+  return (
+    <div>
+      <p>Email: </p>
+      <input className = "textField" type="text"></input>
+    </div>
+  );
 }
 
 export default Email;

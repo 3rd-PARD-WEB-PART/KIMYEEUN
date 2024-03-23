@@ -1,9 +1,9 @@
-function Button () {
-    return (
-        <div>
-            버튼
-        </div>
-    );
+function Button() {
+  return (
+    <div>
+      <button className = "btn">Submit</button>
+    </div>
+  );
 }
 
 export default Button;

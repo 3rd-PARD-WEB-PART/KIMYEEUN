@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.FormArea {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 330px;
+    height: auto;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.textField {
+    display: flex;
+    width: 300px;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.textField:hover {
+    background-color: aliceblue;
+}
+
+.btn {
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    width: 305px;
+    height: 40px;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.message {
+    display: flex;
+    width: 300px;
+    height: 45px;
+    margin-bottom: 20px;
+}
+
+.message:hover {
+    background-color: aliceblue;
+}

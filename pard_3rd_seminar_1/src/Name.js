@@ -1,7 +1,8 @@
 function Name () {
     return (
         <div>
-            name
+            <p>Name: </p>
+            <input className = "textField" type = "text"></input>
         </div>
     );
 }
