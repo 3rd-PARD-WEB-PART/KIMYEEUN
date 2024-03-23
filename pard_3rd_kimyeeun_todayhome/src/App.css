@@ -30,6 +30,7 @@
   font-weight: bold;
   margin-bottom: 60px;
 }
+
 .Title {
   display: flex;
   width: 600px;
@@ -95,4 +96,5 @@
 
 .my-underline {
   text-decoration-line: underline;
+  cursor: pointer;
 }
