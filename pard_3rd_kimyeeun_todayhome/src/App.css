@@ -12,7 +12,7 @@
   width: 100vw;
   height: 100vh;
 }
-
+/* 
 .SubApp {
   display: flex;
   flex-direction: column;
@@ -97,4 +97,4 @@
 .my-underline {
   text-decoration-line: underline;
   cursor: pointer;
-}
+} */
