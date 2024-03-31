@@ -153,7 +153,7 @@ const Search = styled.input`
   margin-left: 11px;
   border: none;
   font-size: 16px;
-  &:focus {
+  &:focus{
     outline: none;
   }
 `;
@@ -274,7 +274,7 @@ const ButtonImg = styled.img`
   margin-bottom: 10px;
 `;
 const ButtonText = styled.div`
-  margin-bottom: 6px;
+margin-bottom: 6px;
 `;
 const BoldSpan = styled.span`
   font-weight: bold;
