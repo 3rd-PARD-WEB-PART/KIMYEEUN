@@ -19,22 +19,28 @@ function Profile() {
           <Search type="text" placeholder="통합검색" />
         </SearchBar>
         <Icons>
-          <Icon src={process.env.PUBLIC_URL + "/scrap.svg"} />
-          <Icon src={process.env.PUBLIC_URL + "/alert.svg"} />
-          <Icon src={process.env.PUBLIC_URL + "/bucket.svg"} />
+          <Icon src={process.env.PUBLIC_URL + "/scrap.svg"} marginRight={21} />
+          <Icon src={process.env.PUBLIC_URL + "/alert.svg"} marginRight={18} />
+          <Icon
+            src={process.env.PUBLIC_URL + "/bucket.svg"}
+            marginRight={16.5}
+          />
         </Icons>
         <img src={process.env.PUBLIC_URL + "/smallProfileIcon.svg"} />
-        <div>글쓰기</div>
+        <WriteButton>글쓰기</WriteButton>
       </Header>
-
-      <MenuRow>
-        <div>프로필</div>
+      <MenuRow fontSize={18}>
+        <div>
+          <Span>프로필</Span>
+        </div>
         <div>나의 쇼핑</div>
         <div>나의 리뷰</div>
         <div>설정</div>
       </MenuRow>
-      <MenuRow>
-        <div>모두보기</div>
+      <MenuRow fontSize={15}>
+        <div>
+          <Span>모두보기</Span>
+        </div>
         <div>사진</div>
         <div>집들이</div>
         <div>노하우</div>
@@ -52,10 +58,10 @@ function Profile() {
             <Name>예은KIM</Name>
             <FollowArea>
               <div>
-                팔로워 <span>0</span>
+                팔로워 <BoldSpan>0</BoldSpan>
               </div>
               <div>
-                팔로잉 <span>0</span>
+                팔로잉 <BoldSpan>0</BoldSpan>
               </div>
             </FollowArea>
             <Setting>설정</Setting>
@@ -63,34 +69,34 @@ function Profile() {
           <Hr />
           <ButtonArea>
             <Button>
-              <img src={process.env.PUBLIC_URL + "/scrapButton.svg"} />
-              <div>스크랩북</div>
-              <div>0</div>
+              <ButtonImg src={process.env.PUBLIC_URL + "/scrapButton.svg"} />
+              <ButtonText>스크랩북</ButtonText>
+              <BoldSpan>0</BoldSpan>
             </Button>
             <Button>
-              <img src={process.env.PUBLIC_URL + "/heartButton.svg"} />
-              <div>좋아요</div>
-              <div>0</div>
+              <ButtonImg src={process.env.PUBLIC_URL + "/heartButton.svg"} />
+              <ButtonText>좋아요</ButtonText>
+              <BoldSpan>0</BoldSpan>
             </Button>
             <Button>
-              <img src={process.env.PUBLIC_URL + "/couponButton.svg"} />
-              <div>내 쿠폰</div>
-              <div>0</div>
+              <ButtonImg src={process.env.PUBLIC_URL + "/couponButton.svg"} />
+              <ButtonText>내 쿠폰</ButtonText>
+              <BoldSpan>0</BoldSpan>
             </Button>
           </ButtonArea>
         </ProfileArea>
 
         <div>
           <div>
-            <div>
-              사진 <span>0</span>
-            </div>
+            <BoxText>
+              사진 <Span>0</Span>
+            </BoxText>
             <Box>+ 첫 번째 사진을 올려보세요.</Box>
           </div>
           <div>
-            <div>
-              집들이 <span>0</span>
-            </div>
+            <BoxText>
+              집들이 <Span>0</Span>
+            </BoxText>
             <Box>+ 첫 번째 집들이를 올려보세요.</Box>
           </div>
         </div>
@@ -145,17 +151,32 @@ const Search = styled.input`
   width: 100%;
   height: 90%;
   margin-left: 11px;
-  color: #dbdbdb;
   border: none;
   font-size: 16px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Icons = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 `;
-const Icon = styled.img``;
+
+const WriteButton = styled.div`
+  width: 100px;
+  height: 43px;
+  border-radius: 5px;
+  background-color: #35c5f0;
+  color: white;
+  text-align: center;
+  line-height: 43px;
+  font-size: 18px;
+  margin-left: 40px;
+`;
+const Icon = styled.img`
+  margin-right: ${({ marginRight }) => marginRight}px;
+`;
 
 const MenuRow = styled.div`
   display: flex;
@@ -171,6 +192,7 @@ const MenuRow = styled.div`
   border-width: 0px 0px 1px 0px;
   border-color: #eaebef;
   align-items: center;
+  font-size: ${({ fontSize }) => fontSize}px;
 `;
 
 const Body = styled.div`
@@ -197,7 +219,14 @@ const ProfileIcon = styled.img`
   height: 129.5px;
   margin-bottom: 25px;
 `;
-
+const BoxText = styled.div`
+  font-weight: bold;
+  margin-bottom: 21px;
+  font-size: 18px;
+`;
+const Span = styled.span`
+  color: #35c5f0;
+`;
 const Texts = styled.div`
   display: flex;
   flex-direction: column;
@@ -234,13 +263,24 @@ const Hr = styled.hr`
 const ButtonArea = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  text-align: center;
+  gap: 30px;
 `;
 const Button = styled.div`
   display: block;
-
+`;
+const ButtonImg = styled.img`
+  margin-bottom: 10px;
+`;
+const ButtonText = styled.div`
+  margin-bottom: 6px;
+`;
+const BoldSpan = styled.span`
+  font-weight: bold;
 `;
 const Box = styled.div`
-  border: dotted 1px #757575;
+  border: dashed 1px #757575;
   width: 750px;
   height: 187.28px;
   text-align: center;
