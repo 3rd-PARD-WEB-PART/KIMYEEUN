@@ -1,8 +1,19 @@
 import styled from "styled-components";
+import { useState, useRef } from "react";
 
 function EditProfile() {
+    const [selectedFile, setSelectedFile] = useState(null);
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedFile(file);
+    };
+
+    const handleProfileImageClick = () => {
+        document.getElementById('fileInput').click();
+    };
+
   return (
-    <Div>
+    <>
       {/* 가장 상단 div */}
       <Header>
         {/* 로고*/}
@@ -47,73 +58,80 @@ function EditProfile() {
         <div>비밀번호 변경</div>
         <div>추천코드</div>
       </MenuRow>
-      <Body>
-        <Top>
-          <Title>회원정보수정</Title>
-          <Out>탈퇴하기</Out>
-        </Top>
+      <Div>
+        <Body>
+          <Top>
+            <Title>회원정보수정</Title>
+            <Out>탈퇴하기</Out>
+          </Top>
 
-        <Under>
-          <FormArea>
-            <FormPart>
-              <FormLeft>
-                <FormLabel>이메일</FormLabel>
-                <Required>* 필수항목</Required>
-              </FormLeft>
-              <EmailArea>
-                <EmailInput>
-                  <GetEmail type="text" />
-                  <Small>@</Small>
-                  <GetEmail type="text" />
-                </EmailInput>
-                <Alert>
-                  이메일을 변경하시려면 운영자에게 이메일을 보내주세요.
-                </Alert>
-              </EmailArea>
-            </FormPart>
-            <FormPart>
-              <FormLeft>
-                <FormLabel>별명</FormLabel>
-                <Required>* 필수항목</Required>
-              </FormLeft>
-              <Input type="text" />
-            </FormPart>
-            <FormPart>
-              <FormLabel>홈페이지</FormLabel>
-              <Input type="text" />
-            </FormPart>
-            <FormPart>
-              <FormLabel>성별</FormLabel>
-              <label>
-                <input type="radio" name="gender" value="남성" />
-                남성
-              </label>
-              <label>
-                <input type="radio" name="gender" value="여성" />
-                여성
-              </label>
-            </FormPart>
-            <FormPart>
-              <FormLabel>생년월일</FormLabel>
-              <Input type="text" />
-            </FormPart>
-            <FormPart>
-              <FormLabel>한줄 소개</FormLabel>
-              <Input type="text" />
-            </FormPart>
-          </FormArea>
-        </Under>
-        <WriteButton>수정하기</WriteButton>
-      </Body>
-    </Div>
+          <Under>
+            <FormArea>
+              <FormPart>
+                <FormLeft>
+                  <FormLabel>이메일</FormLabel>
+                  <Required>* 필수항목</Required>
+                </FormLeft>
+                <EmailArea>
+                  <EmailInput>
+                    <GetEmail type="text" />
+                    <Small>@</Small>
+                    <GetEmail type="text" />
+                  </EmailInput>
+                  <Alert>
+                    이메일을 변경하시려면 운영자에게 이메일을 보내주세요.
+                  </Alert>
+                </EmailArea>
+              </FormPart>
+              <FormPart>
+                <FormLeft>
+                  <FormLabel>별명</FormLabel>
+                  <Required>* 필수항목</Required>
+                </FormLeft>
+                <Input type="text" />
+              </FormPart>
+              <FormPart>
+                <FormLabel>홈페이지</FormLabel>
+                <Input type="text" />
+              </FormPart>
+              <FormPart>
+                <FormLabel>성별</FormLabel>
+                <RadioOption>
+                  <RadioLabel>
+                    <RadioButton type="radio" name="gender" value="남성" />
+                    남성
+                  </RadioLabel>
+                  <RadioLabel>
+                    <RadioButton type="radio" name="gender" value="여성" />
+                    여성
+                  </RadioLabel>
+                </RadioOption>
+              </FormPart>
+              <FormPart>
+                <FormLabel>생년월일</FormLabel>
+                <Input type="text" />
+              </FormPart>
+              <FormPart>
+                <FormLabel>프로필 이미지</FormLabel>
+                <div>
+                    <input id ="fileInput" type ="file" style={{ display: 'none'}} onChange={handleFileInputChange} />
+                </div>
+              </FormPart>
+              <FormPart>
+                <FormLabel>한줄 소개</FormLabel>
+                <Input type="text" />
+              </FormPart>
+            </FormArea>
+          </Under>
+          <EditButtonWrapper>
+            <EditButton>수정하기</EditButton>
+          </EditButtonWrapper>
+        </Body>
+      </Div>
+    </>
   );
 }
 
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -207,24 +225,22 @@ const MenuRow = styled.div`
 const Span = styled.span`
   color: #35c5f0;
 `;
-
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Body = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  width: 1236px;
+  justify-content: space-around;
+  width: 60%;
   height: 856px;
   box-shadow: 0px 1px 3px 0px #00000033;
   padding: 50px;
 `;
 
-const FormArea = styled.div`
-  background-color: aliceblue;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
 const Top = styled.div`
   display: flex;
   flex-direction: row;
@@ -236,7 +252,6 @@ const Title = styled.div`
   font-family: Inter;
   font-size: 24px;
   font-weight: 700;
-  /* line-height: 29.05px; */
   text-align: center;
 `;
 const Out = styled.div`
@@ -250,13 +265,21 @@ const Out = styled.div`
   cursor: pointer;
 `;
 const Under = styled.div`
-  /* margin-top: 69px; */
+  display: flex;
+  flex-direction: column;
+`;
+
+const FormArea = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 const FormPart = styled.div`
+  width: 45%;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 50px;
+  justify-content: space-between;
 `;
 const FormLeft = styled.div`
   display: flex;
@@ -317,5 +340,50 @@ const Input = styled.input`
   height: 40px;
   border-radius: 6px;
   border: 1px solid #dbdbdb;
+`;
+const ImageInput = styled.input`
+  display: none;
+`;
+const RadioLabel = styled.label`
+  display: flex;
+  color: #292929;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18.15px;
+  text-align: center;
+  align-items: center;
+`;
+const RadioOption = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  gap: 10px;
+`;
+const RadioButton = styled.input`
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  border-radius: 25px;
+  border: 2px solid #dbdbdb;
+  &:checked {
+    border: 5px solid #35c5f0;
+  }
+`;
+const EditButtonWrapper = styled.div`
+  display: flex;
+  justify-content: right;
+`;
+
+const EditButton = styled.div`
+  width: 100px;
+  height: 43px;
+  border-radius: 5px;
+  background-color: #35c5f0;
+  color: white;
+  text-align: center;
+  line-height: 43px;
+  font-size: 18px;
 `;
 export default EditProfile;
