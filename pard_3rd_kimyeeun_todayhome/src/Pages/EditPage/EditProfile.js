@@ -1,16 +1,66 @@
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 function EditProfile() {
-    const [selectedFile, setSelectedFile] = useState(null);
-    const handleFileInputChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedFile(file);
-    };
+  const [emailFirst, setEmailFirst] = useState("");
+  const [emailSecond, setEmailSecond] = useState("");
+  const [nickName, setNickName] = useState("");
+  const [homePage, setHomePage] = useState("");
+  const [gender, setGender] = useState("");
+  const [birth, setBirth] = useState("");
+  const [selectedFile, setSelectedFile] = useState("/DefaultProfileImage.svg");
+  const [bio, setBio] = useState("");
 
-    const handleProfileImageClick = () => {
-        document.getElementById('fileInput').click();
-    };
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    setSelectedFile(imageUrl);
+  };
+
+  const handleProfileImageClick = () => {
+    document.getElementById("fileInput").click();
+  };
+
+  const handleEmailFirstChange = (e) => {
+    setEmailFirst(e.target.value);
+  };
+  const handleEmailSecondChange = (e) => {
+    setEmailSecond(e.target.value);
+  };
+
+  const handleNickNameChange = (e) => {
+    setNickName(e.target.value);
+  };
+
+  const handleHomePageChange = (e) => {
+    setHomePage(e.target.value);
+  };
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+  };
+
+  const handleBirthChange = (e) => {
+    setBirth(e.target.value);
+  };
+
+  const handleBioChange = (e) => {
+    setBio(e.target.value);
+  };
+
+  // 수정하기 버튼 클릭 시 이벤트 핸들러
+  const handleEditButtonClick = () => {
+    console.log("수정된 정보:", {
+      emailFirst,
+      emailSecond,
+      nickName,
+      homePage,
+      gender,
+      birth,
+      selectedFile,
+      bio,
+    });
+  };
 
   return (
     <>
@@ -74,9 +124,9 @@ function EditProfile() {
                 </FormLeft>
                 <EmailArea>
                   <EmailInput>
-                    <GetEmail type="text" />
+                    <GetEmail type="text" onChange={handleEmailFirstChange} />
                     <Small>@</Small>
-                    <GetEmail type="text" />
+                    <GetEmail type="text" onChange={handleEmailSecondChange} />
                   </EmailInput>
                   <Alert>
                     이메일을 변경하시려면 운영자에게 이메일을 보내주세요.
@@ -88,43 +138,62 @@ function EditProfile() {
                   <FormLabel>별명</FormLabel>
                   <Required>* 필수항목</Required>
                 </FormLeft>
-                <Input type="text" />
+                <Input type="text" onChange={handleNickNameChange} />
               </FormPart>
               <FormPart>
                 <FormLabel>홈페이지</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handleHomePageChange} />
               </FormPart>
               <FormPart>
                 <FormLabel>성별</FormLabel>
                 <RadioOption>
                   <RadioLabel>
-                    <RadioButton type="radio" name="gender" value="남성" />
+                    <RadioButton
+                      type="radio"
+                      name="gender"
+                      value="남성"
+                      onClick={handleGenderChange}
+                    />
                     남성
                   </RadioLabel>
                   <RadioLabel>
-                    <RadioButton type="radio" name="gender" value="여성" />
+                    <RadioButton
+                      type="radio"
+                      name="gender"
+                      value="여성"
+                      onClick={handleGenderChange}
+                    />
                     여성
                   </RadioLabel>
                 </RadioOption>
               </FormPart>
               <FormPart>
                 <FormLabel>생년월일</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handleBirthChange} />
               </FormPart>
-              <FormPart>
-                <FormLabel>프로필 이미지</FormLabel>
+              <FormPart justify="none">
+                <FormLabel alignSelf="flex-start">프로필 이미지</FormLabel>
                 <div>
-                    <input id ="fileInput" type ="file" style={{ display: 'none'}} onChange={handleFileInputChange} />
+                  <ProfileImage
+                    src={selectedFile}
+                    onClick={handleProfileImageClick}
+                  />
+                  <input
+                    id="fileInput"
+                    type="file"
+                    onChange={handleFileInputChange}
+                    style={{ display: "none" }}
+                  />
                 </div>
               </FormPart>
               <FormPart>
                 <FormLabel>한줄 소개</FormLabel>
-                <Input type="text" />
+                <Input type="text" onChange={handleBioChange} />
               </FormPart>
             </FormArea>
           </Under>
           <EditButtonWrapper>
-            <EditButton>수정하기</EditButton>
+            <EditButton onSubmit={handleEditButtonClick}>수정하기</EditButton>
           </EditButtonWrapper>
         </Body>
       </Div>
@@ -234,11 +303,11 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-  justify-content: space-around;
-  width: 60%;
-  height: 856px;
+  width: 70%;
+  /* height: 856px; */
   box-shadow: 0px 1px 3px 0px #00000033;
   padding: 50px;
+  margin-bottom: 33px;
 `;
 
 const Top = styled.div`
@@ -274,12 +343,10 @@ const FormArea = styled.div`
   flex-direction: column;
 `;
 const FormPart = styled.div`
-  width: 45%;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 50px;
-  justify-content: space-between;
 `;
 const FormLeft = styled.div`
   display: flex;
@@ -290,9 +357,10 @@ const FormLabel = styled.div`
   font-family: Inter;
   font-size: 15px;
   font-weight: 400;
-  /* line-height: 18.15px; */
-  text-align: center;
+  min-width: 100px;
+  text-align: left;
   color: #292929;
+  align-self: ${(props) => props.alignSelf || ""};
 `;
 const Required = styled.div`
   font-family: Inter;
@@ -341,8 +409,9 @@ const Input = styled.input`
   border-radius: 6px;
   border: 1px solid #dbdbdb;
 `;
-const ImageInput = styled.input`
-  display: none;
+const ProfileImage = styled.img`
+  width: 198px;
+  height: 198px;
 `;
 const RadioLabel = styled.label`
   display: flex;
@@ -377,6 +446,7 @@ const EditButtonWrapper = styled.div`
 `;
 
 const EditButton = styled.div`
+  margin-top: 14px;
   width: 100px;
   height: 43px;
   border-radius: 5px;
@@ -385,5 +455,6 @@ const EditButton = styled.div`
   text-align: center;
   line-height: 43px;
   font-size: 18px;
+  cursor: pointer;
 `;
 export default EditProfile;
