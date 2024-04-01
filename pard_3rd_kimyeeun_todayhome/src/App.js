@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       {/* <RegisterPage /> */}
-      {/* <Profile /> */}
-      <EditProfile />
+      <Profile />
+      {/* <EditProfile /> */}
     </>
   );
 }

@@ -1,6 +1,20 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 function Profile() {
+  const [isIconClicked, setIsIconClicked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
+  const handleIconClick = () => {
+    setIsIconClicked(!isIconClicked); // 클릭 시 상태를 토글합니다.
+    setLikeCount(likeCount + (isIconClicked ? -1 : 1)); // 클릭 시 좋아요 개수를 조절합니다.
+  };
+
+  // isIconClicked 상태에 따라 버튼 이미지의 src를 변경합니다.
+  const buttonImgSrc = isIconClicked
+    ? process.env.PUBLIC_URL + "/heartButtonPressed.svg"
+    : process.env.PUBLIC_URL + "/heartButton.svg";
+
   return (
     <>
       {/* 가장 상단 div */}
@@ -74,9 +88,9 @@ function Profile() {
               <BoldSpan>0</BoldSpan>
             </Button>
             <Button>
-              <ButtonImg src={process.env.PUBLIC_URL + "/heartButton.svg"} />
+              <ButtonImg src={buttonImgSrc} onClick={handleIconClick} />{" "}
               <ButtonText>좋아요</ButtonText>
-              <BoldSpan>0</BoldSpan>
+              <BoldSpan>{likeCount}</BoldSpan>
             </Button>
             <Button>
               <ButtonImg src={process.env.PUBLIC_URL + "/couponButton.svg"} />
@@ -153,7 +167,7 @@ const Search = styled.input`
   margin-left: 11px;
   border: none;
   font-size: 16px;
-  &:focus{
+  &:focus {
     outline: none;
   }
 `;
@@ -274,7 +288,7 @@ const ButtonImg = styled.img`
   margin-bottom: 10px;
 `;
 const ButtonText = styled.div`
-margin-bottom: 6px;
+  margin-bottom: 6px;
 `;
 const BoldSpan = styled.span`
   font-weight: bold;
