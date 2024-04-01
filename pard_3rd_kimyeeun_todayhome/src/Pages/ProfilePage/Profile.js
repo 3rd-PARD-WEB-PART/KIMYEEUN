@@ -5,12 +5,13 @@ function Profile() {
   const [isIconClicked, setIsIconClicked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
+  //하트 아이콘을 누를 떄
   const handleIconClick = () => {
-    setIsIconClicked(!isIconClicked); // 클릭 시 상태를 토글합니다.
-    setLikeCount(likeCount + (isIconClicked ? -1 : 1)); // 클릭 시 좋아요 개수를 조절합니다.
+    setIsIconClicked(!isIconClicked);
+    setLikeCount(likeCount + (isIconClicked ? -1 : 1));
   };
 
-  // isIconClicked 상태에 따라 버튼 이미지의 src를 변경합니다.
+  //버튼 클릭 상태에 따라 다른 이미지가 보이도록 함
   const buttonImgSrc = isIconClicked
     ? process.env.PUBLIC_URL + "/heartButtonPressed.svg"
     : process.env.PUBLIC_URL + "/heartButton.svg";
@@ -32,6 +33,7 @@ function Profile() {
           <img alt="검색 아이콘" src={process.env.PUBLIC_URL + "/search.svg"} />
           <Search type="text" placeholder="통합검색" />
         </SearchBar>
+        {/* 상단바 아이콘 */}
         <Icons>
           <Icon src={process.env.PUBLIC_URL + "/scrap.svg"} marginRight={21} />
           <Icon src={process.env.PUBLIC_URL + "/alert.svg"} marginRight={18} />
