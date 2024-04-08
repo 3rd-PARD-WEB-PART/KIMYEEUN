@@ -1,15 +1,15 @@
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import styled from "styled-components";
+
 const Layout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const isActive = (path) => location.pathname === path;
-
-  const moveTo = (path) => {
-    navigate(path);
-  };
-
+    const activeStyle = {
+        color: '#35c5f0',
+        textDecoration: 'none'
+    };
+    const defaultStyle = {
+        color: 'black',
+        textDecoration: 'none'
+    };
   return (
     <div>
       <Header>
@@ -35,20 +35,10 @@ const Layout = () => {
         <WriteButton>글쓰기</WriteButton>
       </Header>
       <MenuRow gap={51} fontSize={18}>
-        <NavLink
-          onClick={() => moveTo("/")}
-          isActive={isActive("/".toString())}
-        >
-          프로필
-        </NavLink>
-        <NavLink>나의 쇼핑</NavLink>
-        <NavLink>나의 리뷰</NavLink>
-        <NavLink
-          onClick={() => moveTo("/editProfile")}
-          isActive={isActive("/editProfile".toString())}
-        >
-          설정
-        </NavLink>
+        <NavLink to={`/`} style={({isActive}) => (isActive ? activeStyle: defaultStyle)}>프로필</NavLink>
+        <NavLink style={defaultStyle}>나의 쇼핑</NavLink>
+        <NavLink style={defaultStyle}>나의 리뷰</NavLink>
+        <NavLink to={`/editProfile`} style={({isActive}) => (isActive ? activeStyle: defaultStyle)}>설정</NavLink>
       </MenuRow>
       <main>
         <Outlet />
@@ -145,8 +135,5 @@ const MenuRow = styled.div`
   gap: ${({ gap }) => gap}px;
   font-size: ${({ fontSize }) => fontSize}px;
 `;
-const NavLink = styled.a`
-  cursor: pointer;
-  color: ${(props) => (props.isActive ? "#35c5f0" : "black")};
-`;
+
 export default Layout;
