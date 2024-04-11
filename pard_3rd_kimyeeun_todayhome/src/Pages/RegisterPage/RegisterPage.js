@@ -1,4 +1,9 @@
+import {useNavigate} from "react-router-dom";
+
 function RegisterPage() {
+
+  const navigate = useNavigate();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, confirmPassword, nickname } = e.target.elements;
@@ -22,6 +27,7 @@ function RegisterPage() {
     console.log (email.value, password.value, confirmPassword.value, nickname.value);
     console.log("유효한 폼");
     alert("회원가입 성공!");
+    navigate("/profile");
   };
 
   const validateEmail = (email) => {
