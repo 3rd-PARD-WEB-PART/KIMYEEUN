@@ -35,7 +35,7 @@ const Layout = () => {
         <WriteButton>글쓰기</WriteButton>
       </Header>
       <MenuRow gap={51} fontSize={18}>
-        <NavLink to={`/`} style={({isActive}) => (isActive ? activeStyle: defaultStyle)}>프로필</NavLink>
+        <NavLink to={`/profile`} style={({isActive}) => (isActive ? activeStyle: defaultStyle)}>프로필</NavLink>
         <NavLink style={defaultStyle}>나의 쇼핑</NavLink>
         <NavLink style={defaultStyle}>나의 리뷰</NavLink>
         <NavLink to={`/editProfile`} style={({isActive}) => (isActive ? activeStyle: defaultStyle)}>설정</NavLink>
