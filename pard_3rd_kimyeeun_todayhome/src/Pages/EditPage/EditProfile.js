@@ -1,47 +1,39 @@
+// EditProfile.js
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { userInfo } from "../../Atom";
 import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
-  const defaultEmailFirst = "webpart";
-  const defaultEmailSecond = "pard.com";
-  const defaultNickName = "팡일Kim";
-  const defaultHomePage = "we-pard.com";
-  const defaultGender = "여성";
-  const defaultBirth = "2024.01.01";
-  const defaultSelectedFile = "/DefaultProfileImage.svg";
-  const defaultBio = "안녕하세요 웹파트 과제입니다";
+  const [userInfoState, setUserInfo] = useRecoilState(userInfo);
+  const [tmpUserInfoState, setTmpUserInfoState] = useState({});
 
-  const [emailFirst, setEmailFirst] = useState(defaultEmailFirst);
-  const [emailSecond, setEmailSecond] = useState(defaultEmailSecond);
-  const [nickName, setNickName] = useState(defaultNickName);
-  const [homePage, setHomePage] = useState(defaultHomePage);
-  const [gender, setGender] = useState(defaultGender);
-  const [birth, setBirth] = useState(defaultBirth);
-  const [selectedFile, setSelectedFile] = useState(defaultSelectedFile);
-  const [bio, setBio] = useState(defaultBio);
+  useEffect(() => {
+    setTmpUserInfoState(userInfoState);
+    setTimeout(500, console.log(tmpUserInfoState));
+  }, []);
 
-  const handleInputChange = (e, setter) => {
-    setter(e.target.value);
+  const handleInputChange = (e, field) => {
+    setTmpUserInfoState((prevTmpUserInfo) => ({
+      ...prevTmpUserInfo,
+      [field]: e.target.value,
+    }));
   };
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     const imageUrl = URL.createObjectURL(file);
-    setSelectedFile(imageUrl);
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      profileImage: imageUrl,
+    }));
   };
 
   const handleEditButtonClick = () => {
-    console.log("수정된 정보:", {
-      emailFirst,
-      emailSecond,
-      nickName,
-      homePage,
-      gender,
-      birth,
-      selectedFile,
-      bio,
-    });
+    setUserInfo(tmpUserInfoState);
+    console.log("수정된 정보:", userInfoState);
+    alert("수정하신 정보가 저장되었습니다.");
     moveToProfile();
   };
 
@@ -52,6 +44,7 @@ function EditProfile() {
 
   return (
     <>
+      {console.log(tmpUserInfoState)}
       <MenuRow gap={25} fontSize={15}>
         <div>
           <Span>회원정보수정</Span>
@@ -80,14 +73,14 @@ function EditProfile() {
                   <EmailInput>
                     <GetEmail
                       type="text"
-                      value={emailFirst}
-                      onChange={(e) => handleInputChange(e, setEmailFirst)}
+                      value={tmpUserInfoState.emailFirst}
+                      onChange={(e) => handleInputChange(e, "emaiFirst")}
                     />
                     <Small>@</Small>
                     <GetEmail
                       type="text"
-                      value={emailSecond}
-                      onChange={(e) => handleInputChange(e, setEmailSecond)}
+                      value={tmpUserInfoState.emailSecond}
+                      onChange={(e) => handleInputChange(e, "emailSecond")}
                     />
                   </EmailInput>
                   <Alert>
@@ -102,16 +95,16 @@ function EditProfile() {
                 </FormLeft>
                 <Input
                   type="text"
-                  value={nickName}
-                  onChange={(e) => handleInputChange(e, setNickName)}
+                  value={tmpUserInfoState.nickname}
+                  onChange={(e) => handleInputChange(e, "nickname")}
                 />
               </FormPart>
               <FormPart>
                 <FormLabel>홈페이지</FormLabel>
                 <Input
                   type="text"
-                  value={homePage}
-                  onChange={(e) => handleInputChange(e, setHomePage)}
+                  value={tmpUserInfoState.homepage}
+                  onChange={(e) => handleInputChange(e, "homepage")}
                 />
               </FormPart>
               <FormPart>
@@ -121,9 +114,9 @@ function EditProfile() {
                     <RadioButton
                       type="radio"
                       name="gender"
-                      value="남성"
-                      checked={gender === "남성"}
-                      onChange={(e) => handleInputChange(e, setGender)}
+                      value="0"
+                      checked={tmpUserInfoState.gender === "0"}
+                      onChange={(e) => handleInputChange(e, "gender")}
                     />
                     남성
                   </RadioLabel>
@@ -131,9 +124,9 @@ function EditProfile() {
                     <RadioButton
                       type="radio"
                       name="gender"
-                      value="여성"
-                      checked={gender === "여성"}
-                      onChange={(e) => handleInputChange(e, setGender)}
+                      value="1"
+                      checked={tmpUserInfoState.gender === "1"}
+                      onChange={(e) => handleInputChange(e, "gender")}
                     />
                     여성
                   </RadioLabel>
@@ -143,15 +136,15 @@ function EditProfile() {
                 <FormLabel>생년월일</FormLabel>
                 <Input
                   type="text"
-                  value={birth}
-                  onChange={(e) => handleInputChange(e, setBirth)}
+                  value={tmpUserInfoState.date}
+                  onChange={(e) => handleInputChange(e, "date")}
                 />
               </FormPart>
               <FormPart justify="none">
                 <FormLabel alignSelf="flex-start">프로필 이미지</FormLabel>
                 <div>
                   <ProfileImage
-                    src={selectedFile}
+                    src={tmpUserInfoState.profileImage}
                     onClick={() => document.getElementById("fileInput").click()}
                   />
                   <input
@@ -166,8 +159,8 @@ function EditProfile() {
                 <FormLabel>한줄 소개</FormLabel>
                 <Input
                   type="text"
-                  value={bio}
-                  onChange={(e) => handleInputChange(e, setBio)}
+                  value={tmpUserInfoState.introduce}
+                  onChange={(e) => handleInputChange(e, "introduce")}
                 />
               </FormPart>
             </FormArea>
@@ -364,4 +357,5 @@ const EditButton = styled.div`
   font-size: 18px;
   cursor: pointer;
 `;
+
 export default EditProfile;

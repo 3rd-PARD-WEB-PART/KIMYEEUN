@@ -10,6 +10,7 @@ function Profile() {
   const moveToEdit = () => {
     navigate("/editProfile");
   };
+
   //하트 아이콘을 누를 떄
   const handleIconClick = () => {
     setIsIconClicked(!isIconClicked);
@@ -36,22 +37,26 @@ function Profile() {
       </MenuRow>
       <Body>
         <ProfileArea>
-          <ProfileIcon
-            alt="프로필 아이콘"
-            src={process.env.PUBLIC_URL + "/profileIcon.svg"}
-          />
-          <Texts>
-            <Name>예은KIM</Name>
-            <FollowArea>
-              <div>
-                팔로워 <BoldSpan>0</BoldSpan>
-              </div>
-              <div>
-                팔로잉 <BoldSpan>0</BoldSpan>
-              </div>
-            </FollowArea>
-            <Setting onClick = {moveToEdit}>설정</Setting>
-          </Texts>
+          <BoxFlex>
+            <ProfileIcon
+              alt="프로필 아이콘"
+              src={process.env.PUBLIC_URL + "/profileIcon.svg"}
+            />
+            <Texts>
+              <Name>예은KIM</Name>
+              <FollowFlex>
+                <FollowArea>
+                  <div>
+                    팔로워 <BoldSpan>0</BoldSpan>
+                  </div>
+                  <div>
+                    팔로잉 <BoldSpan>0</BoldSpan>
+                  </div>
+                </FollowArea>
+                <Setting onClick={moveToEdit}>설정</Setting>
+              </FollowFlex>
+            </Texts>
+          </BoxFlex>
           <Hr />
           <ButtonArea>
             <Button>
@@ -105,36 +110,115 @@ const MenuRow = styled.div`
   border-color: #eaebef;
   align-items: center;
   font-size: ${({ fontSize }) => fontSize}px;
+  div {
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  @media (max-width: 767px) {
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
+
+  @media (min-width: 1024px) {
+  }
 `;
 
 const Body = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 153px;
   margin-top: 30.88px;
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const ProfileArea = styled.div`
-  width: 285px;
-  height: 460.24px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+
   border: 1px solid #dbdbdb;
   border-radius: 3px;
   padding-top: 31px;
+  
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 300px;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 90%;
+    height: 300px;
+    flex-direction: column;
+  }
+
+  @media (min-width: 1024px) {
+    width: 285px;
+    height: 460.24px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
+
+  }
+`;
+
+const BoxFlex = styled.div`
+  display: flex;
+
+  @media (max-width: 767px) {
+    width: 285px;
+    height: 460.24px;
+    flex-direction: row;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 285px;
+    height: 460.24px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    width: 285px;
+    height: 460.24px;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ProfileIcon = styled.img`
   width: 130px;
   height: 129.5px;
   margin-bottom: 25px;
+
+  @media (max-width: 767px) {
+    margin-left: 20px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin-left: 25px;
+  }
+
+  @media (min-width: 1024px) {
+  }
 `;
 const BoxText = styled.div`
   font-weight: bold;
   margin-bottom: 21px;
   font-size: 18px;
+  /* align-items: left; */
 `;
 const Span = styled.span`
   color: #35c5f0;
@@ -142,15 +226,50 @@ const Span = styled.span`
 const Texts = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  @media (max-width: 767px) {
+    margin-left: 15px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin-left: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    align-items: center;
+  }
 `;
 const Name = styled.div`
   font-family: Inter;
   font-size: 26px;
   font-weight: 700;
   line-height: 31.47px;
-  text-align: center;
+
   margin-bottom: 13px;
+
+  @media (max-width: 767px) {
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
+
+  @media (min-width: 1024px) {
+    text-align: center;
+  }
+`;
+const FollowFlex = styled.div`
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 767px) {
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+  }
+
+  @media (min-width: 1024px) {
+    align-items: center;
+  }
 `;
 const FollowArea = styled.div`
   display: flex;
@@ -169,16 +288,32 @@ const Setting = styled.div`
   cursor: pointer;
 `;
 const Hr = styled.hr`
-  width: 231px;
-  color: #eaebef;
+border: 0;
+height: 1px;
+  background: #eaebef;
   margin-bottom: 28.39px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    align-self: center;
+    width: 90%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 231px;
+  }
 `;
 const ButtonArea = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
+  justify-content: space-around;
   text-align: center;
   gap: 30px;
+  margin-bottom: 20px;
 `;
 const Button = styled.div`
   display: block;
@@ -186,6 +321,7 @@ const Button = styled.div`
 const ButtonImg = styled.img`
   margin-bottom: 10px;
 `;
+
 const ButtonText = styled.div`
   margin-bottom: 6px;
 `;
@@ -194,10 +330,22 @@ const BoldSpan = styled.span`
 `;
 const Box = styled.div`
   border: dashed 1px #757575;
-  width: 750px;
+
   height: 187.28px;
   text-align: center;
   line-height: 187.28px;
   margin-bottom: 61.77px;
+
+  @media (max-width: 767px) {
+    width: 700px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 735px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 750px;
+  }
 `;
 export default Profile;

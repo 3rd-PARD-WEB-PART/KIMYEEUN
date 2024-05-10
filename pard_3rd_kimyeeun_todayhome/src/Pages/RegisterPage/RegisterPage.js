@@ -1,13 +1,23 @@
 import {useNavigate} from "react-router-dom";
+import {useRecoilState} from "recoil";
+import { userInfo } from "../../Atom";
 
 function RegisterPage() {
+  const [userInfoState, setUserInfoState] = useRecoilState(userInfo);
 
   const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, confirmPassword, nickname } = e.target.elements;
 
+    const { email, password, confirmPassword, nickname } = e.target.elements;
+    const [emailFirst, emailSecond] = email.value.split('@');
+    setUserInfoState({
+      emailFirst: emailFirst,
+      emailSecond: emailSecond,
+      password: password.value,
+      nickname: nickname.value
+    });
     if (!validateEmail(email.value)) {
       alert("유효한 이메일을 입력해주세요.");
       return;
@@ -24,6 +34,7 @@ function RegisterPage() {
       alert("2~15자의 닉네임을 입력해주세요.");
       return;
     }
+
     console.log (email.value, password.value, confirmPassword.value, nickname.value);
     console.log("유효한 폼");
     alert("회원가입 성공!");
