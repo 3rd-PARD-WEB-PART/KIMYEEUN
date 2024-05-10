@@ -8,6 +8,9 @@
 + 아래는 파드 3기 웹 파트 4차 과제 제출물입니다.
 리코일을 활용하여 사용자가 입력한 정보를 전역변수로 상태관리 합니다.
 또한, 반응형으로 여러 화면 크기에 맞추어 다른 레이아웃을 노출합니다.
+<img width="1226" alt="오늘의집반응형1" src="https://github.com/3rd-PARD-WEB-PART/KIMYEEUN/assets/145086605/7734d5e3-d719-43da-a9c2-73acb0dceea4">
+
+<img width="751" alt="오늘의집반응형" src="https://github.com/3rd-PARD-WEB-PART/KIMYEEUN/assets/145086605/fb97ff2e-4751-4c8c-a9eb-82e91c062802">
 
 
 + 아래는 파드 3기 웹 파트 2, 3차 과제 제출물입니다.
