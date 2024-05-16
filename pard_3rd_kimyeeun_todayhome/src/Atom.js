@@ -4,9 +4,9 @@ import { atom } from "recoil";
 const {persistAtom} = recoilPersist();
 
 export const userInfo = atom({
-  key: 'userInfoState',
+  key: 'userInfo',
   default: {
-    emailFirst: "",
+    emailFirst: "yenny031003",
     emailSecond:"",
     password: "",
     nickname: "",

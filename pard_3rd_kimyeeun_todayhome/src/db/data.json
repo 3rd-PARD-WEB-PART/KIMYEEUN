@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "emailFirst": "minzzi0068",
+      "emailSecond": "gamil.com",
+      "password": "1234",
+      "nickname": "귀요미",
+      "homepage": "",
+      "gender": "0",
+      "date": "2000.06.08",
+      "progileImage": "",
+      "introduce": "안녕하세요",
+      "profileImage": "blob:http://localhost:3000/b299dc96-7f83-4ac2-8930-0681098b1f44"
+    }
+  ]
+}

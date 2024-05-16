@@ -4,15 +4,30 @@ import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { userInfo } from "../../Atom";
 import { useNavigate } from "react-router-dom";
+import { getInfo, patchInfo } from "../../API/AxiosAPI";
 
 function EditProfile() {
   const [userInfoState, setUserInfo] = useRecoilState(userInfo);
   const [tmpUserInfoState, setTmpUserInfoState] = useState({});
 
+  //data.json에 저장된 정보를 불러와서 리코일에 저장
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const response = await getInfo(1);
+        console.log(response);
+        setUserInfo(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchInfo();
+  }, []);
+
+  //리코일에 저장된 정보를 화면에 표시하는 state에 연동
   useEffect(() => {
     setTmpUserInfoState(userInfoState);
-    setTimeout(500, console.log(tmpUserInfoState));
-  }, []);
+  }, [userInfoState]);
 
   const handleInputChange = (e, field) => {
     setTmpUserInfoState((prevTmpUserInfo) => ({
@@ -30,11 +45,16 @@ function EditProfile() {
     }));
   };
 
-  const handleEditButtonClick = () => {
-    setUserInfo(tmpUserInfoState);
-    console.log("수정된 정보:", userInfoState);
-    alert("수정하신 정보가 저장되었습니다.");
-    moveToProfile();
+  const handleEditButtonClick = async () => {
+    try {
+      const response = await patchInfo(tmpUserInfoState);
+      setUserInfo(tmpUserInfoState);
+      console.log("수정된 정보:", userInfoState);
+      alert("수정하신 정보가 저장되었습니다.");
+      moveToProfile();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const navigate = useNavigate();
@@ -44,7 +64,7 @@ function EditProfile() {
 
   return (
     <>
-      {console.log(tmpUserInfoState)}
+    {console.log (userInfoState)}
       <MenuRow gap={25} fontSize={15}>
         <div>
           <Span>회원정보수정</Span>
